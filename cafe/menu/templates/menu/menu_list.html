@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="menu-section section-padding " id="section_3">
+    <div class="container">
+        <div class="row">
+            {% for menu in menus  %}
+
+            <div class="col-lg-6 col-12 mb-4 mb-lg-0">
+                <div class="menu-block-wrap">
+                    <div class="text-center mb-4 pb-lg-2">
+                        <em class="text-white">{{menu.title}}</em>
+                        <h4 class="text-white">{{menu.description}}</h4>
+                    </div>
+                    {% for food in menu.food_set.all  %}
+                    <div class="menu-block">
+                        <div class="d-flex">
+                            <h6>{{food.name}}</h6>
+                            {% if food.recommended %}
+                             <span class="badge ms-3">Recommend</span>
+                            {% endif %}
+                            <span class="underline"></span>
+                            {% if food.previous_cost %}
+                             <strong class="text-white ms-auto"><del>{{food.previous_cost}}</del></strong>
+                            {% endif %}
+                            <strong class="ms-auto">${{food.cost}}</strong>
+                        </div>
+
+                        <div class="border-top mt-2 pt-2">
+                            <small>{{food.description}}</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+</section>\
+{% endblock %}
